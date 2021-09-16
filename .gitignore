@@ -6,3 +6,5 @@
 *.iobj
 *.ipdb
 *.pdb
+config.xml
+.gitignore

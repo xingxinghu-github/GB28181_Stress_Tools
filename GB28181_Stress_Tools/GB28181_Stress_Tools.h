@@ -13,6 +13,7 @@
 
 // CGB28181StressToolsApp:
 // See GB28181_Stress_Tools.cpp for the implementation of this class
+// CWinApp ：派生出 Windows 应用程序对象的基类。
 //
 
 class CGB28181StressToolsApp : public CWinApp

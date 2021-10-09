@@ -217,7 +217,7 @@ void Device::push_task() {
 		}
 		return;
 	}
-
+	// ES --> PES --> PS
 	char ps_header[PS_HDR_LEN];
 
 	char ps_system_header[SYS_HDR_LEN];
@@ -316,11 +316,11 @@ void Device::push_task() {
 					unsigned char  packt_length_ary[2];
 					packt_length_ary[0] = (rtp_packet_length >> 8) & 0xff;
 					packt_length_ary[1] = rtp_packet_length & 0xff;
-					memcpy(rtp_packet, packt_length_ary, 2);
+					memcpy(rtp_packet, packt_length_ary, 2*sizeof(unsigned char));
 					rtp_start_index = 2;
 				}
-				memcpy(rtp_packet + rtp_start_index, rtp_header, RTP_HDR_LEN);
-				memcpy(rtp_packet + +rtp_start_index + RTP_HDR_LEN, frame + (i* single_packet_max_length), writed_count);
+				memcpy(rtp_packet + rtp_start_index, rtp_header, RTP_HDR_LEN*sizeof(char));
+				memcpy(rtp_packet + rtp_start_index + RTP_HDR_LEN, frame + i* single_packet_max_length, writed_count);
 				rtp_seq++;
 
 				udp_client->send_packet(target_ip, target_port, rtp_packet, rtp_start_index + rtp_packet_length);
@@ -333,7 +333,6 @@ void Device::push_task() {
 				std::this_thread::sleep_for(std::chrono::milliseconds(send_packet_interval -dis));
 			}*/
 			std::this_thread::sleep_for(std::chrono::milliseconds(38));
-
 		}
 	}
 	if (udp_client != nullptr) {

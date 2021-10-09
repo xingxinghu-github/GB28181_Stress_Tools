@@ -17,6 +17,7 @@
 #include <vector>
 #include "pugixml.hpp"
 #include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -289,16 +290,17 @@ void CGB28181StressToolsDlg::Start() {
 	//多少Deivce对应一个队列
 	int rate = 20;
 
-	int start_port = 50000;
+	int start_port = 40000;
 
 	callback = std::bind(&CGB28181StressToolsDlg::update_item,this, std::placeholders::_1, std::placeholders::_2);
-	std::string device_id_prefix = "3402000000132000";
-	std::string channel_id_prefix = "3402000000131000";
+	std::string device_id_prefix = CT2A(m_edit_server_sip_id.GetBuffer());
+	device_id_prefix = device_id_prefix.substr(0, 16);
+	std::string channel_id_prefix = device_id_prefix;
 	std::string device_id;
 	std::string channel_id;
 	for (int i = 0; i < device_count; i++) {
 
-		this_thread::sleep_for(std::chrono::milliseconds(300));
+		this_thread::sleep_for(std::chrono::milliseconds(50));
 
 		if (!is_started) {
 			break;

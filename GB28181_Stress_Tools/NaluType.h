@@ -1,5 +1,5 @@
 #pragma once
-typedef enum {
+typedef enum{
 	NALU_TYPE_SLICE = 1,
 	NALU_TYPE_DPA = 2,
 	NALU_TYPE_DPB = 3,

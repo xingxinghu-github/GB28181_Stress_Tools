@@ -146,7 +146,7 @@ int gb28181_make_pes_header(char *pData, int stream_id, int payload_len, int64_t
 
 	bits_write(&bitsBuffer, 24, 0x000001);	//*start code*//*
 	bits_write(&bitsBuffer, 8, (stream_id));	//*streamID*//*
-	bits_write(&bitsBuffer, 16, (payload_len)+13);	//*packet_len*//* //指出pes分组中数据长度和该字节后的长度和
+	bits_write(&bitsBuffer, 16, payload_len+13);	//*packet_len*//* //指出pes分组中数据长度和该字节后的长度和
 	bits_write(&bitsBuffer, 2, 2);		//*'10'*//*
 	bits_write(&bitsBuffer, 2, 0);		//*scrambling_control*//*
 	bits_write(&bitsBuffer, 1, 0);		//*priority*//*

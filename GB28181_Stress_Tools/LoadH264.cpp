@@ -47,8 +47,8 @@ void out_nalu(char * buffer, int size, NaluType naluType) {
 	nalu->packet = packet;
 	nalu->length = size;
 	nalu->type = naluType;
-
 	nalu_vector.push_back(nalu);
+	delete nalu;
 }
 
 int load(const char * path) {
